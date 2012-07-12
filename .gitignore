@@ -1,0 +1,10 @@
+*.class
+*.log
+*.swp
+.classpath
+.project
+.settings
+target
+target-eclipse
+stacktrace.log
+
