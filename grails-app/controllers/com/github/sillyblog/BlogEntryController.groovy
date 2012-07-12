@@ -27,4 +27,26 @@ class BlogEntryController {
 		}
 		render view:'show',model:[entry:entry2Show]
 	}
+
+	/**
+	 * This  action just show the creation form. It should be protected later on
+	**/
+	def createEntry(){
+		render view:'create'
+	}
+
+	/**
+	 * It saves blog entries instances
+	**/
+	def saveEntry(){
+		def entry = new BlogEntry(params)
+		if (!entry.save()){
+			flash.message = 'blog.entry.create.error.validation'
+			flash.type = 'error'
+			render view:'create',model:[entry:entry]
+		} else {
+			flash.message = 'blog.entry.create.success'
+			redirect action:'index'
+		}
+	}
 }

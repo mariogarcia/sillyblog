@@ -43,7 +43,9 @@
 						</div>
 					</div>
 					<!-- end #menu -->
-					<div id="banner"><img src="images/img05.jpg" width="940" height="300" alt="" /></div>
+					<div id="banner">
+						<g:img dir="images" file="img05.jpg" width="940" height="300"/>
+					</div>
 					<div id="content">
 						<g:layoutBody/>
 					</div>
