@@ -54,4 +54,41 @@ class BlogEntryControllerSpec extends Specification{
 			flash.type == 'error'
 			!model.entry
 	}
+
+	def "trying to create a new entry"(){
+		when: "Clicking on create"
+			controller.createEntry()
+		then: "We should go to the right view"
+			view == '/blogEntry/create'
+	}
+
+	def "Testing saving a new blog entry"(){
+		given: "Some form params"
+			controller.params.entryTitle = 't'
+			controller.params.entryText = 't'
+			controller.params.entryDate = new Date()
+		when: "Trying to save the entry"
+			controller.saveEntry()
+		then: "A new entry should be available"
+			BlogEntry.list().size() == 2
+			flash.message == 'blog.entry.create.success'
+			response.redirectedUrl == '/blogEntry/index'
+	}
+
+	def "Trying to save a non valid blog entry"(){
+		given: "Not enough parameters"
+			controller.params.entryTitle = 't'
+			controller.params.entryText = 't'
+		when: "Trying to save the entry"
+			controller.saveEntry()
+		then: "Something goes wrong"
+			view == '/blogEntry/create'
+		 /* Because of entryDate */
+			model.entry.errors.errorCount == 1
+			model.entry.entryTitle == 't'
+			model.entry.entryText == 't'
+			flash.message == 'blog.entry.create.error.validation'
+			flash.type == 'error'
+	}
+
 }
