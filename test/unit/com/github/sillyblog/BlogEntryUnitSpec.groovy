@@ -1,9 +1,7 @@
 package com.github.sillyblog
 
 import spock.lang.Specification
-
 import grails.test.mixin.*
-import org.junit.*
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
@@ -42,6 +40,6 @@ class BlogEntryUnitSpec extends Specification{
 		 /* The entry instance now has errors */
 			entry.hasErrors()
 		 /* It fails because I haven't filled three fields */
-			entry.errors.errorCount == 3
+			entry.errors.errorCount == 2
 	}
 }

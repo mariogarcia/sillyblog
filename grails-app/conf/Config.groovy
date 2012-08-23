@@ -91,3 +91,27 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+grails.resources.modules= {
+    ui {
+        dependsOn 'jquery,jquery-ui'
+        defaultBundle 'ui'
+
+		resource url:'/js/date.js'
+		resource url:'/js/util.js'
+		resource url:'/cs/blogentry.coffee'
+		resource url:'/js/blogentry-dom.js'
+	
+		resource url:'/css/style.css'
+    }
+
+	jasmineTests{
+	 /* Depends on jasmine to run the tests and ui because the 
+		js we want to test are inside that module */
+		dependsOn 'jasmine,ui'
+
+	 /* Here we define the specs */	
+		resource url:'/js/tests/SimpleSpec.js'
+	}
+}
+

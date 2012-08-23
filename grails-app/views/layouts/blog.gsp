@@ -5,11 +5,14 @@
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title><g:layoutTitle default="Silly Blog"/></title>
-<link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css" />
-<link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
-<link href="${resource(dir: 'css', file: 'style.css')}" rel="stylesheet" type="text/css" media="screen" />
+<r:require modules="ui"/>
 <g:layoutHead/>
 <r:layoutResources />
+<r:script>
+	$(function(){
+		$("input:submit").button();
+	});
+</r:script>
 </head>
 <body>
 <div id="wrapper">
@@ -43,9 +46,11 @@
 						</div>
 					</div>
 					<!-- end #menu -->
+					<%--
 					<div id="banner">
 						<g:img dir="images" file="img05.jpg" width="940" height="300"/>
 					</div>
+					--%>
 					<div id="content">
 						<g:layoutBody/>
 					</div>

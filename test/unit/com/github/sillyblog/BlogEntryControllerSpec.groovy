@@ -2,6 +2,8 @@ package com.github.sillyblog
 
 import spock.lang.Specification
 
+import org.grails.taggable.Tag
+
 import grails.test.mixin.*
 import grails.test.mixin.support.*
 
@@ -11,13 +13,18 @@ import grails.test.mixin.support.*
  * @author marioggar
  *
 **/
-@Mock(BlogEntry)
+@Mock([BlogEntry,Tag])
 @TestFor(BlogEntryController)
 class BlogEntryControllerSpec extends Specification{
 
 	def setup(){
 	 /* I always want to have an available saved instance */
 		new BlogEntry(entryTitle:'t',entryText:'t',entryDate:new Date()).save()
+	 /* Taggable dynamic behavior doesn't seem to work in unit testing 
+		so it has to be faked */
+		BlogEntry.metaClass.parseTags = {s-> s}
+	 /* Adding the service to the controller */
+		controller.blogEntryService = new BlogEntryService()
 	}
 
 	def "Testing index action"(){
@@ -67,6 +74,7 @@ class BlogEntryControllerSpec extends Specification{
 			controller.params.entryTitle = 't'
 			controller.params.entryText = 't'
 			controller.params.entryDate = new Date()
+			controller.params.tags = ""
 		when: "Trying to save the entry"
 			controller.saveEntry()
 		then: "A new entry should be available"
@@ -78,7 +86,6 @@ class BlogEntryControllerSpec extends Specification{
 	def "Trying to save a non valid blog entry"(){
 		given: "Not enough parameters"
 			controller.params.entryTitle = 't'
-			controller.params.entryText = 't'
 		when: "Trying to save the entry"
 			controller.saveEntry()
 		then: "Something goes wrong"
@@ -86,7 +93,6 @@ class BlogEntryControllerSpec extends Specification{
 		 /* Because of entryDate */
 			model.entry.errors.errorCount == 1
 			model.entry.entryTitle == 't'
-			model.entry.entryText == 't'
 			flash.message == 'blog.entry.create.error.validation'
 			flash.type == 'error'
 	}

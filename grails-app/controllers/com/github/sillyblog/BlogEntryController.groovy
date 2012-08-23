@@ -1,11 +1,15 @@
 package com.github.sillyblog
 
+import org.grails.taggable.Tag
+
 /**
  * This controller has all actions over BlogEntry instances
  * 
  * @author marioggar
 **/
 class BlogEntryController {
+
+	def blogEntryService
 
    /**
 	* Shows all available blog entries
@@ -40,10 +44,15 @@ class BlogEntryController {
 	**/
 	def saveEntry(){
 		def entry = new BlogEntry(params)
-		if (!entry.save()){
+		def entryTags = params.tags	
+	 /* Trying to save the entry with its tags */
+		entry = blogEntryService.saveBlogEntryWithTags(entry,entryTags)
+	 /* In case the entry had errors it should show them */
+		if (entry.hasErrors()){
 			flash.message = 'blog.entry.create.error.validation'
 			flash.type = 'error'
-			render view:'create',model:[entry:entry]
+			render view:'create',model:[entry:entry,entryTags:entryTags]
+	 /* Otherwise we will redirected to the entry list */
 		} else {
 			flash.message = 'blog.entry.create.success'
 			redirect action:'index'
