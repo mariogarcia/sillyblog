@@ -1,7 +1,8 @@
 <div class="post">
 	<h2 class="title">
 		<g:if test="${!isFullEntry}">
-			<g:link controller="blogEntry" action="show" params="${[id:post.id]}">${post.entryTitle}</g:link>
+			<g:link controller="blogEntry" action="show" 
+					params="${[id:post.id,entryTitle:post.entryTitle]}">${post.entryTitle}</g:link>
 		</g:if>
 		<g:else>${post.entryTitle}</g:else>
 	</h2>

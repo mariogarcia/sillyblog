@@ -1,5 +1,7 @@
 package com.github.sillyblog
 
+import groovy.transform.ToString
+import groovy.transform.EqualsAndHashCode
 import org.grails.taggable.Taggable
 
 /**
@@ -9,8 +11,11 @@ import org.grails.taggable.Taggable
  * @author marioggar
  * 
 **/
+@ToString(includeNames=true,includes="entryTitle,entryDate")
+@EqualsAndHashCode(includeFields=true,includes="id")
 class BlogEntry implements Taggable{
 
+	Long id
 	String entryTitle,entryText
 	Date entryDate
 

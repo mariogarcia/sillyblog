@@ -1,7 +1,5 @@
 package com.github.sillyblog
 
-import org.codehaus.groovy.grails.web.converters.marshaller.json.GroovyBeanMarshaller
-
 import grails.converters.JSON
 import grails.test.mixin.*
 import grails.test.mixin.support.*
