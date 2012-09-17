@@ -45,4 +45,24 @@ class BlogEntryIntegrationSpec extends IntegrationSpec {
 			BlogEntry.findAllTagsWithCriteria([max:5]){ilike('name','gr%')}.size() == 2
 	}
 
+	def "Testing equals and toString"(){
+		given: "Two different entries"
+			def date = new Date()
+			def first = [
+				entryTitle: "First entry",
+				entryText: "short text",
+				entryDate: date 
+			] as BlogEntry
+			def second = [
+				entryTitle: "First entry",
+				entryText: "short text",
+				entryDate: date 
+			] as BlogEntry
+		when: "Saving both"
+			[first,second]*.save()
+		then: "Although they could have the same toString output they aren't equals"
+			first.id != second.id
+			first != second
+			first.toString() == second.toString()
+	}
 }

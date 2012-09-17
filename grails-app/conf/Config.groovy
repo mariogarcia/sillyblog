@@ -115,3 +115,13 @@ grails.resources.modules= {
 	}
 }
 
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.github.sillyblog.security.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.github.sillyblog.security.UserRole'
+grails.plugins.springsecurity.authority.className = 'com.github.sillyblog.security.Role'
+
+/* SECURING USER'S ADMINISTRATION URLS. THE REST IS CONTROLLED BY ANNOTATIONS */
+grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+	'/security/**': ['ROLE_ADMIN']
+]

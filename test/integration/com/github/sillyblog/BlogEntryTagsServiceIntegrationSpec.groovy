@@ -27,6 +27,7 @@ class BlogEntryTagsServiceIntegrationSpec extends IntegrationSpec{
 			save().
 		 /* You can only add a tag in an already saved entry */
 			addTag("John")
+			assert blogEntry
 		when: "Trying to retrieve all tags starting with Joh"
 			def result = blogEntryTagsService.findAllTagsByNameLike("Joh")
 		then: "There's only one entry with one tag"

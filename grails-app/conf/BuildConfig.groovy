@@ -32,11 +32,12 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-
         // runtime 'mysql:mysql-connector-java:5.1.16'
+
     }
 
     plugins {
+	 /* Plugins used during compilation/runtime */
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.7.1"
         runtime ":resources:1.1.6"
@@ -44,13 +45,27 @@ grails.project.dependency.resolution = {
 		compile ":coffeescript-resources:0.3.2"
 		compile ":taggable:1.0.1"
 		compile ":jquery-ui:1.8.15"
+		compile ":spring-security-core:1.2.7.3"
+
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.4"
+
+	 /* Testing plugins */
 		test ":spock:0.6"
 		compile ":jasmine-resources:0.1.1"
-
+ 		compile ":codenarc:0.17" 
+	 /* Others */
         build ":tomcat:$grailsVersion"
     }
 }
+
+ /* Using Codenarc for code checking purposes */
+	codenarc.properties = {
+     // Each property definition is of the form:  RULE.PROPERTY-NAME = PROPERTY-VALUE
+  	 /* Since Grails 2.0.1 public methods are preffered insteadof closures */
+		GrailsPublicControllerMethod.enabled = false
+      //EmptyIfStatement.priority = 1
+	}
+

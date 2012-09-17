@@ -1,5 +1,6 @@
 package com.github.sillyblog
 
+import grails.plugins.springsecurity.Secured
 import org.grails.taggable.Tag
 
 /**
@@ -33,8 +34,9 @@ class BlogEntryController {
 	}
 
 	/**
-	 * This  action just show the creation form. It should be protected later on
+	 * This  action just show the creation form.
 	**/
+	@Secured(["ROLE_ADMIN","ROLE_USER"])
 	def createEntry(){
 		render view:'create'
 	}
@@ -42,6 +44,7 @@ class BlogEntryController {
 	/**
 	 * It saves blog entries instances
 	**/
+	@Secured(["ROLE_ADMIN","ROLE_USER"])
 	def saveEntry(){
 		def entry = new BlogEntry(params)
 		def entryTags = params.tags	

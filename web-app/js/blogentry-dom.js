@@ -8,11 +8,12 @@ function createDatepicker(elementId,format){
 		dateFormat:format,
 		onClose:function(dateText,inst){
 		 /* Workaround for spanish year format and jquery's datepicker format */
-			var selectedDate = Date.parseExact(dateText,format.replace("yy","yyyy"));
+			var normalizedFormat = format.replace("yy","yyyy").replace("mm","MM");
+			var selectedDate = Date.parseExact(dateText,normalizedFormat);
 		 /* And then set all date's fields */
-			$(elementId + UNDERSCORE + 'day').val(selectedDate.getDate())
-			$(elementId + UNDERSCORE + 'month').val(selectedDate.getMonth() + 1)
-			$(elementId + UNDERSCORE + 'year').val(selectedDate.getFullYear())
+			$(elementId + UNDERSCORE + 'day').val(selectedDate.getDate());
+			$(elementId + UNDERSCORE + 'month').val(selectedDate.getMonth() + 1);
+			$(elementId + UNDERSCORE + 'year').val(selectedDate.getFullYear());
 		}
 	});
 }
