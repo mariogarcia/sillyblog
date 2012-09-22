@@ -36,7 +36,7 @@ class BlogEntryController {
 	/**
 	 * This  action just show the creation form.
 	**/
-	@Secured("ROLE_ADMIN,ROLE_USER")
+	@Secured(["ROLE_ADMIN","ROLE_USER"])
 	def createEntry(){
 		render view:'create'
 	}
@@ -44,7 +44,7 @@ class BlogEntryController {
 	/**
 	 * It saves blog entries instances
 	**/
-	@Secured("ROLE_ADMIN,ROLE_USER")
+	@Secured(["ROLE_ADMIN","ROLE_USER"])
 	def saveEntry(){
 		def entry = new BlogEntry(params)
 		def entryTags = params.tags	
