@@ -66,6 +66,8 @@ grails.project.dependency.resolution = {
      // Each property definition is of the form:  RULE.PROPERTY-NAME = PROPERTY-VALUE
   	 /* Since Grails 2.0.1 public methods are preffered insteadof closures */
 		GrailsPublicControllerMethod.enabled = false
+		GrailsDomainHasEquals.doNotApplyToClassNames="Role, User, UserRole"
+		GrailsDomainHasToString.doNotApplyToClassNames="Role, User, UserRole"
       //EmptyIfStatement.priority = 1
 	}
 

@@ -2,6 +2,7 @@
 	<head>
 		<meta name="layout" content="blog"/>
 		<title><g:message code="blog.entry.list.create.title" default="Title"/></title>
+		<content tag="menuItem">create</content>
 		<g:set var="format" value="dd/MM/yyyy"/>
 		<g:set var="jsFormat" value="${format.toLowerCase() - 'yy'}"/>
 		<r:script>

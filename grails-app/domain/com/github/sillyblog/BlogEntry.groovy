@@ -22,6 +22,6 @@ class BlogEntry implements Taggable{
     static constraints = {
 		entryTitle nullable:false,blank:false
 		entryText nullable:false,blank:false
-		entryDate nullable:true
+		entryDate nullable:false
     }
 }

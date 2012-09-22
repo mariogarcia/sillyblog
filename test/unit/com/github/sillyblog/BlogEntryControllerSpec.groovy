@@ -73,7 +73,12 @@ class BlogEntryControllerSpec extends Specification{
 		given: "Some form params"
 			controller.params.entryTitle = 't'
 			controller.params.entryText = 't'
-			controller.params.entryDate = new Date()
+		 /* To pass the date value we need to 
+			fill three fields */
+			controller.params.entryDate_day = '01' 
+			controller.params.entryDate_month = '02' 
+			controller.params.entryDate_year = '2012' 
+		 /* No tags here */
 			controller.params.tags = ""
 		when: "Trying to save the entry"
 			controller.saveEntry()
@@ -86,6 +91,7 @@ class BlogEntryControllerSpec extends Specification{
 	def "Trying to save a non valid blog entry"(){
 		given: "Not enough parameters"
 			controller.params.entryTitle = 't'
+			controller.params.entryText = 'text'
 		when: "Trying to save the entry"
 			controller.saveEntry()
 		then: "Something goes wrong"
