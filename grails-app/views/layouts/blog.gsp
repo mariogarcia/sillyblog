@@ -32,16 +32,30 @@
 					<div id="menu-wrapper">
 						<div id="menu">
 							<ul>
-								<li class="current_page_item">
+								<li class="${pageProperty(name:'page.menuItem') == 'index' ? 'current_page_item' :''}">
 									<g:link controller="blogEntry" action="index">
 										<g:message code="blog.index.menu.home"/>
 									</g:link>
 								</li>
-								<li>
-									<a href="#">
-										<g:message code="blog.index.menu.contact"/>
-									</a>
-								</li>
+								<sec:ifLoggedIn>
+										<li class="${pageProperty(name:'page.menuItem') == 'create' ? 'current_page_item' :''}">
+											<g:link controller="blogEntry" action="createEntry">
+												<g:message code="blog.entry.create.title"/>
+											</g:link>
+										</li>
+										<li>
+											<g:link controller="logout" action="index">
+												<g:message code="blog.index.menu.logout"/>
+											</g:link>
+										</li>
+								</sec:ifLoggedIn>
+								<sec:ifNotLoggedIn>
+										<li>
+											<g:link controller="login" action="index">
+												<g:message code="blog.index.menu.login"/>
+											</g:link>
+										</li>
+								</sec:ifNotLoggedIn>
 							</ul>
 						</div>
 					</div>

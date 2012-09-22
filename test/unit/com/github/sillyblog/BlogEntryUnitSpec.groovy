@@ -40,6 +40,6 @@ class BlogEntryUnitSpec extends Specification{
 		 /* The entry instance now has errors */
 			entry.hasErrors()
 		 /* It fails because I haven't filled three fields */
-			entry.errors.errorCount == 2
+			entry.errors.errorCount == 3
 	}
 }

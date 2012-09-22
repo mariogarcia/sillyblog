@@ -17,7 +17,4 @@ class BlogEntryServiceIntegrationSpec extends IntegrationSpec{
 			result.hasErrors() == false
 			result.tags == ['java','scala','groovy']
 	}
-
-
-
 }

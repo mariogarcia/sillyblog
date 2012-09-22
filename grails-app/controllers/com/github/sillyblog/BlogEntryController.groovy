@@ -17,7 +17,7 @@ class BlogEntryController {
 	**/
     def index() {
 	 /* Using render() in order to be able to assert views in unit testing */
-		render view:'index',model:[entries:BlogEntry.list()]	
+		render view:'index',model:[entries:BlogEntry.list(sort:"entryDate",order:"desc")]	
 	}
 
    /**
