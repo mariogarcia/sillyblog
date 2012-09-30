@@ -9,5 +9,6 @@
 			<%-- REUSING THE POST TEMPLATE --%>
 			<tmpl:postTemplate post="${post}"/>
 		</g:each>
+		<g:paginate controller="blogEntry" action="index" max="5" total="${entriesTotal}"/>
 	</body>
 </html>

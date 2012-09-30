@@ -17,7 +17,18 @@ class BlogEntryController {
 	**/
     def index() {
 	 /* Using render() in order to be able to assert views in unit testing */
-		render view:'index',model:[entries:BlogEntry.list(sort:"entryDate",order:"desc")]	
+		render(
+			view:'index',
+			model:[
+			 /* We are using the paginate tag but we want also to sosrt by entryDate */
+				entries:BlogEntry.list(
+					offset:params.offset,
+					max:params.max,
+					sort:'entryDate',
+					order:'desc'),
+				entriesTotal:BlogEntry.count()
+			]	
+		)
 	}
 
    /**

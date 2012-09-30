@@ -45,9 +45,9 @@
 										</li>	
 										<g:if test="${pageProperty(name:'page.menuItem') == 'edit'}">
 											<li class="${pageProperty(name:'page.menuItem') == 'edit' ? 'current_page_item' :''}">
-												<g:link controller="blogEntry" action="editEntry">
+												<a href="#">
 													<g:message code="blog.entry.edit.title"/>
-												</g:link>
+												</a>
 											</li>
 										</g:if>
 										<li>
@@ -99,7 +99,7 @@
 								</ul>
 							</li>
 							<li>
-								<h2>Blogroll</h2>
+								<h2><g:message code="blog.index.tagfrequency"/></h2>
 								<p id="tagCloud">
 									<g:render template="/layouts/blogEntryTagCloud"/>
 								</p>

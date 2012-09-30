@@ -10,10 +10,13 @@ class UrlMappings {
 	
 	  /* BLOG ENTRIES URLS */	
 		"/entry-list"(controller:"blogEntry",action:"index")
-		"/entry/$id/$entryTitle"(controller:"blogEntry",action:"show")
-		"/entry-new"(controller:"blogEntry",action:"createEntry")
-		"/entry-save"(controller:"blogEntry",action:"saveEntry")
-			
+		"/show/$id/$entryTitle"(controller:"blogEntry",action:"show")
+		"/new"(controller:"blogEntry",action:"createEntry")
+		"/edit/$id/$entryTitle"(controller:"blogEntry",action:"editEntry")
+		"/save"(controller:"blogEntry",action:"saveEntry")
+
+	 /* INDEX PAGINATION */	
+		"/index/$offset/$max"(controller:"blogEntry",action="index")
 	 /* HOME VIEW */
 		"/"(controller:"blogEntry",action:"index")
 		//"/"(view:"/index")

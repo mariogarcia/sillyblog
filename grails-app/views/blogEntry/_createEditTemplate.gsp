@@ -35,7 +35,7 @@
 				<g:textField class="text long" 
 						name="tags" 
 						id="tags" 
-						value="${entryTags?.join(", ")}"/>	
+						value="${entryTags?.findAll{it.trim() != ','}?.join(", ")}"/>	
 			<label><g:message code="blog.entry.create.form.date"/></label>
 				<tmpl:datePickerField 
 					name="entryDate" 

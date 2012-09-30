@@ -38,6 +38,27 @@ class BlogEntryControllerSpec extends Specification{
 			model.entries.find{it}.entryText == 't'
 	}
 
+	def "Testing pagination with index action"(){
+		given: "Seven entries paginated 5 per page"
+		 /* One through six because there's already one saved */
+			def entries = (1..6).collect{n->
+				new BlogEntry(entryTitle:"t${n}",entryText:'t',entryDate:new Date()).save()
+			}*.save()		
+			def executionClosure = {page,itemsPerPage->
+				controller.params.offset = page * 5
+				controller.params.max = 5
+				controller.index()
+			 /* Entries size must match */
+				model.entries.size() == itemsPerPage	
+			}
+		expect: "A given number of items per page"
+			executionClosure.call(page,itemsPerPage)
+		where: "Pages and expected results are"
+			page	|	itemsPerPage
+			 0		|		5
+			 1		|		2
+	}
+
 	def "Testing show action of an existent entry"(){
 		given: "The id of the previosly saved instance"
 			def id = BlogEntry.list().find{it}.id

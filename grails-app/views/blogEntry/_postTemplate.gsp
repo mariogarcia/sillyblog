@@ -9,7 +9,7 @@
 	<p class="meta"><g:message code="blog.entry.post.postedOn"/> <g:formatDate date="${post.entryDate}" type="datetime" style="MEDIUM"/> 
 		<sec:ifLoggedIn>
 			&nbsp;&bull;&nbsp; <g:link class="permalink" 
-				controller="blogEntry" action="editEntry" params="${[id:post.id]}">
+				controller="blogEntry" action="editEntry" params="${[id:post.id,entryTitle:post.entryTitle]}">
 					<g:message code="blog.index.menu.edit"/>
 				</g:link>
 		</sec:ifLoggedIn>
