@@ -42,7 +42,14 @@
 											<g:link controller="blogEntry" action="createEntry">
 												<g:message code="blog.entry.create.title"/>
 											</g:link>
-										</li>
+										</li>	
+										<g:if test="${pageProperty(name:'page.menuItem') == 'edit'}">
+											<li class="${pageProperty(name:'page.menuItem') == 'edit' ? 'current_page_item' :''}">
+												<g:link controller="blogEntry" action="editEntry">
+													<g:message code="blog.entry.edit.title"/>
+												</g:link>
+											</li>
+										</g:if>
 										<li>
 											<g:link controller="logout" action="index">
 												<g:message code="blog.index.menu.logout"/>

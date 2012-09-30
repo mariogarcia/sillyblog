@@ -1,11 +1,13 @@
 import com.github.sillyblog.*
 import com.github.sillyblog.security.*
+import org.apache.commons.lang.StringUtils
  
 class BootStrap {
 
     def init = { servletContext ->
 		createAdminUser()
 		createSomeSampleEntries()
+		createSomeStringUtils()
     }
 
     def destroy = { }
@@ -41,5 +43,18 @@ class BootStrap {
 				entryDate: new Date()
 			)
 		}*.save()
+	}
+
+   /**
+	* Adding the intro method to all String and GString instances.
+	* Specially handy for views
+	**/
+	def createSomeStringUtils(){ 
+		String.metaClass.intro = {len ->
+  			return StringUtils.abbreviate(delegate, len) ?: ''
+		}
+		GString.metaClass.intro = {len ->
+  			return StringUtils.abbreviate(delegate.toString(), len)
+		}
 	}
 }

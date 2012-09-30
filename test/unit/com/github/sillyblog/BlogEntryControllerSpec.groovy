@@ -88,6 +88,23 @@ class BlogEntryControllerSpec extends Specification{
 			response.redirectedUrl == '/blogEntry/index'
 	}
 
+	def "Updating a record"(){
+		given: "An already saved record"
+			def recordEntry = BlogEntry.list(max:1).find{it}	
+			def recordEntryId = recordEntry.id
+			def formerTitle = recordEntry.entryTitle
+			def newTitle = "New Title"
+		when:"Passing the id to the save action"
+			controller.params.id = recordEntryId
+			controller.params.entryTitle = newTitle
+		and: "Invoking the action"
+			controller.saveEntry()
+			def changedEntry = BlogEntry.get(recordEntryId)
+		then:"It should have changed its properties successfully"
+			changedEntry.entryTitle != formerTitle
+			changedEntry.entryTitle == newTitle 
+	}
+
 	def "Trying to save a non valid blog entry"(){
 		given: "Not enough parameters"
 			controller.params.entryTitle = 't'
@@ -103,4 +120,34 @@ class BlogEntryControllerSpec extends Specification{
 			flash.type == 'error'
 	}
 
+	def "Editing an existing blog entry successfully"(){
+		given: "An existing blog entry"
+			def existingBlogEntry = BlogEntry.list(max:1).find{it}
+		and: "Mocking adding tags functionality"
+			existingBlogEntry.metaClass{
+				tags = []
+				addTag = {tag->
+					delegate.tags << tag
+				}
+			}
+		and:"Adding tags"
+			existingBlogEntry.addTag("java")
+			controller.params.id = existingBlogEntry.id
+		when: "When invoking the controller with the entry's id"
+			controller.editEntry()
+		then: "The entry model should be shown in the right view"
+			view == '/blogEntry/edit'
+			model.entryTags.size() == 1
+			model.entry.id == existingBlogEntry.id
+	}
+
+	def "Trying to edit a non existing blog entry"(){
+		when: "Trying to edit a non valid entry"
+			controller.params.id = 9999
+			controller.editEntry()
+		then: "The user should be redirected to the index page"
+			response.redirectedUrl == "/blogEntry/index"
+			flash.message == "blog.entry.edit.error"
+			flash.type == "error"
+	}
 }

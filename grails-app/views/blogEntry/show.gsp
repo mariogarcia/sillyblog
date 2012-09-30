@@ -5,6 +5,6 @@
 	</head>
 	<body>
 		<%-- REUSING THE POST TEMPLATE --%>
-		<tmpl:postTemplate post="${entry}" isFullEntry="true"/>
+		<tmpl:postTemplate post="${entry}" fullEntry="${true}"/>
 	</body>
 </html>
