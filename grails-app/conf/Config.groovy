@@ -125,3 +125,6 @@ grails.plugins.springsecurity.authority.className = 'com.github.sillyblog.securi
 grails.plugins.springsecurity.controllerAnnotations.staticRules = [
 	'/security/**': ['ROLE_ADMIN']
 ]
+
+grails.taggable.tagLink.autoImport = true 
+grails.taggable.tagLink.autoImport = true 

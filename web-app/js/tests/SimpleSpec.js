@@ -13,4 +13,9 @@ describe("A simple suite", function() {
 	it("tests the extractlast(term) function",function(){
 		expect(blogEntry.extractLast('hola, amigo')).toBe('amigo');
 	});
+
+	it("tests the createFrequencyLabelString(key,val) ",function(){
+		expect(blogEntry.createFrequencyLabelString("java",2)).toBe("java(2) ");	
+	});
+
 });

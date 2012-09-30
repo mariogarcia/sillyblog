@@ -35,4 +35,25 @@ class BlogEntryTagsServiceIntegrationSpec extends IntegrationSpec{
 			result.size() == 1
 			result.find().name == 'john'
 	}
+
+	def "Getting the frequency of the saved tags"(){
+		setup: "Saving a blog entry with a few tags"
+			new BlogEntry(
+				entryTitle:'t',
+				entryText:'t',
+				entryDate:new Date()
+			).save().
+		 /* You can only add a tag in an already saved entry */
+			addTag("Java").
+			addTag("Ruby").
+			addTag("Groovy")
+		expect: "To get the right frequency for the given language"
+			blogEntryTagsService.getTagFrequency().getAt(language) == frequency
+		where: "The parameters are"
+			language	|	frequency
+			"java"		|	1
+			"groovy"	|	1
+			"ruby"		|	1	
+	}
+
 }

@@ -11,3 +11,12 @@ class BlogEntry.Instance
 	extractLast: (term) ->
   		@split(term).pop()
 
+ ### Creates a list of tag terms and its frequencies in parenthesis ###
+	createFrequencyList: (parentId,action) ->
+		callback = (data) ->
+			for key,value of data
+				$(parentId).append(key+"("+value+") ")
+    ### Finally calling the controller ###
+		$.getJSON(action,callback)
+
+

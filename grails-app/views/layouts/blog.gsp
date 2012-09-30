@@ -69,55 +69,33 @@
 						<g:layoutBody/>
 					</div>
 					<!-- end #content -->
+					<g:set var="lastSix" value="${com.github.sillyblog.BlogEntry.list(max:6,sort:'entryDate',order:'desc')}"/>
 					<div id="sidebar">
 						<ul>
 							<li>
-								<h2>Aliquam tempus</h2>
-								<p>Mauris vitae nisl nec metus placerat perdiet est. Phasellus dapibus semper consectetuer hendrerit.</p>
+								<h2><g:message code="blog.entry.list.last"/></h2>
+								<p>
+									<g:set var="lastEntry" value="${lastSix.find{it}}"/>
+									<g:link controller="blogEntry" action="show" 
+										params="[id:lastEntry.id]">${lastEntry.entryTitle}</g:link>
+								</p>
 							</li>
 							<li>
-								<h2>Categories</h2>
+								<h2><g:message code="blog.entry.list.lasts"/></h2>
 								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
+									<g:each var="entry" in="${lastSix}">
+										<li>
+											<g:link controller="blogEntry" action="show" 
+												params="[id:entry.id]">${entry.entryTitle}</g:link>
+										</li>
+									</g:each>
 								</ul>
 							</li>
 							<li>
 								<h2>Blogroll</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-							<li>
-								<h2>Archives</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
-							</li>
-							<li>
-								<h2>Consequat Amet</h2>
-								<ul>
-									<li><a href="#">Aliquam libero</a></li>
-									<li><a href="#">Consectetuer adipiscing elit</a></li>
-									<li><a href="#">Metus aliquam pellentesque</a></li>
-									<li><a href="#">Suspendisse iaculis mauris</a></li>
-									<li><a href="#">Urnanet non molestie semper</a></li>
-									<li><a href="#">Proin gravida orci porttitor</a></li>
-								</ul>
+								<p id="tagCloud">
+									<g:render template="/layouts/blogEntryTagCloud"/>
+								</p>
 							</li>
 						</ul>
 					</div>

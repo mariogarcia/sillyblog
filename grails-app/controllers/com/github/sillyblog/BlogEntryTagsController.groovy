@@ -18,4 +18,14 @@ class BlogEntryTagsController{
 
 		render result as JSON
 	}
+
+  /**
+	* This method returns a map containing the frequency for every tag used in the blog entries
+	**/
+	def getTagFrequency(){
+		def result = blogEntryTagsService.getTagFrequency()
+
+		render result as JSON
+	}
+
 }
